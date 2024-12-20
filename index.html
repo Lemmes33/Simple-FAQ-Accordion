@@ -7,29 +7,68 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>FAQ Accordion</h1>
-  <div class="accordion">
+    <img src="background.jpeg" alt="Background Image" class="background-image">
+    <div class="accordion">
+    <div class="accordion-header">
+      <img src="faq-icon.png" alt="FAQs Icon" class="faq-icon">
+      <h1>FAQs</h1>
+    </div>
     <div class="accordion-item">
-      <input type="radio" id="question1" name="accordion" hidden>
-      <label class="accordion-title" for="question1">What is an FAQ?</label>
+      <div class="accordion-title">
+        What is an FAQ?
+        <span class="toggle-btn">+</span>
+      </div>
       <div class="accordion-content">
         FAQ stands for Frequently Asked Questions, a section where common questions are answered.
       </div>
     </div>
     <div class="accordion-item">
-      <input type="radio" id="question2" name="accordion" hidden>
-      <label class="accordion-title" for="question2">How does this accordion work?</label>
+      <div class="accordion-title">
+        How does this accordion work?
+        <span class="toggle-btn">+</span>
+      </div>
       <div class="accordion-content">
-        This accordion uses HTML radio buttons and CSS selectors to show and hide content.
+        This accordion uses JavaScript to toggle the visibility of content.
       </div>
     </div>
     <div class="accordion-item">
-      <input type="radio" id="question3" name="accordion" hidden>
-      <label class="accordion-title" for="question3">Can I add more questions?</label>
+      <div class="accordion-title">
+        Can I add more questions?
+        <span class="toggle-btn">+</span>
+      </div>
       <div class="accordion-content">
         Yes! You can easily add more questions by following the same structure.
       </div>
     </div>
   </div>
+
+  <script>
+    // Select all accordion items
+    const accordionItems = document.querySelectorAll('.accordion-item');
+
+    // Add click event to each accordion title
+    accordionItems.forEach(item => {
+      const title = item.querySelector('.accordion-title');
+      const toggleBtn = title.querySelector('.toggle-btn');
+
+      title.addEventListener('click', () => {
+        // Toggle current item
+        item.classList.toggle('open');
+
+        // Update toggle button (plus/minus)
+        const isOpen = item.classList.contains('open');
+        toggleBtn.textContent = isOpen ? '-' : '+';
+
+        // Close other items (optional: for single open behavior)
+        accordionItems.forEach(i => {
+          if (i !== item) {
+            i.classList.remove('open');
+            const otherToggleBtn = i.querySelector('.toggle-btn');
+            otherToggleBtn.textContent = '+';
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
